@@ -1,26 +1,33 @@
 import React from "react";
-import { Container } from "@mui/material";
+import { Box, Container, Button } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
+import Workouts from "./Workouts";
+import Heading from "./Heading";
 
 export default function Calendar() {
-  const [value, setValue] = React.useState(dayjs());
+  const [date, setDate] = React.useState(dayjs());
   const changedValue = (value) => {
     console.log(value.toJSON());
-    setValue(value);
+    setDate(value);
   };
 
   return (
     <div>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DateCalendar
-          value={value}
-          views={["day"]}
-          onChange={(newValue) => changedValue(newValue)}
-        />
-      </LocalizationProvider>
+      <Heading headingTitle={"Workouts"}></Heading>
+      <Box display={"flex"} flexDirection={"row"} justifyContent={"center"}>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DateCalendar
+            sx={{ margin: 0, mr: 5 }}
+            value={date}
+            views={["day"]}
+            onChange={(newValue) => changedValue(newValue)}
+          />
+          <Workouts />
+        </LocalizationProvider>
+      </Box>
     </div>
   );
 }
