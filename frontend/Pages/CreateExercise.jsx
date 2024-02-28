@@ -34,7 +34,6 @@ export default function CreateExercise() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("submited");
     const data = new FormData(event.currentTarget);
     const name = data.get("name");
     const group = data.get("group");
