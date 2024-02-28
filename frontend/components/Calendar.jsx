@@ -17,17 +17,27 @@ export default function Calendar() {
   return (
     <div>
       <Heading headingTitle={"Workouts"}></Heading>
-      <Box display={"flex"} flexDirection={"row"} justifyContent={"center"}>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DateCalendar
-            sx={{ margin: 0, mr: 5 }}
-            value={date}
-            views={["day"]}
-            onChange={(newValue) => changedValue(newValue)}
-          />
-          <Workouts />
-        </LocalizationProvider>
-      </Box>
+      <Container maxWidth="lg">
+        <Box
+          display={"flex"}
+          flexDirection={{ xs: "column", sm: "row" }}
+          justifyContent={"center"}
+          gap={10}
+        >
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DateCalendar
+              sx={{
+                margin: 0,
+                mr: 5,
+              }}
+              value={date}
+              views={["day"]}
+              onChange={(newValue) => changedValue(newValue)}
+            />
+            <Workouts />
+          </LocalizationProvider>
+        </Box>
+      </Container>
     </div>
   );
 }

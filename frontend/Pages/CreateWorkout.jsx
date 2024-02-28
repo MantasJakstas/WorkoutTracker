@@ -8,8 +8,13 @@ export default function CreateWorkout() {
   return (
     <div>
       <Heading headingTitle="Create Workout" />
-      <Container>
-        <Box display={"flex"} justifyContent="space-between" mt={5}>
+      <Container component="main">
+        <Box
+          display={"flex"}
+          flexDirection={{ xs: "column", sm: "row" }}
+          justifyContent="space-between"
+          mt={5}
+        >
           <Box>
             <Typography>Create Your Workout:</Typography>
             <Link to="/">

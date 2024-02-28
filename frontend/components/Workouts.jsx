@@ -6,7 +6,12 @@ export default function Workouts() {
     <div>
       <Link to="/workout">
         <Button
-          sx={{ height: 50, borderRadius: 3, mt: 2, width: 350 }}
+          sx={{
+            height: 50,
+            borderRadius: 3,
+            mt: 2,
+            width: { xs: 200, sm: 350 },
+          }}
           variant="contained"
           color="success"
         >
