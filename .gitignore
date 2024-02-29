@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.github
+*.vs
+/backend/bin
+/backend/obj
