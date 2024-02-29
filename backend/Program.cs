@@ -1,3 +1,6 @@
+using backend.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
@@ -14,6 +17,9 @@ builder.Services.AddCors(options =>
                           policy.WithOrigins("http://localhost:5173");
                       });
 });
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("WorkoutTrackerDbLocal")));
 
 var app = builder.Build();
 
