@@ -1,4 +1,6 @@
 ﻿using backend.Data;
+using backend.Dtos.Exercise;
+using backend.Mappers;
 using backend.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,10 +20,15 @@ namespace backend.Controllers
         [HttpGet]
         public IActionResult GetAllExercises()
         {
-            Exercise exercise = new Exercise();
-            exercise.Name = "Test";
-            exercise.MuscleGroup = Constants.MuscleGroup.Combined;
-            _context.Exercises.Add(exercise);
+            List<GetExerciseRequest> exercises = _context.Exercises.Select(e => e.ToExerciseDto()).ToList();
+            return Ok(exercises);
+        }
+
+        [HttpPost]
+        public IActionResult CreateExercise([FromBody] CreateExerciseRequest exercise)
+        {
+            _context.Exercises.Add(exercise.ToExerciseCreateDto());
+            _context.SaveChanges();
             return Ok(exercise);
         }
     }
