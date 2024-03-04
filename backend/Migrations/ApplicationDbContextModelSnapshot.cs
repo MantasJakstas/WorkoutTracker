@@ -37,9 +37,35 @@ namespace backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("WorkoutId")
+                        .HasColumnType("int");
+
                     b.HasKey("ExerciseId");
 
+                    b.HasIndex("WorkoutId");
+
                     b.ToTable("Exercises");
+                });
+
+            modelBuilder.Entity("backend.Models.ExerciseRepetitions", b =>
+                {
+                    b.Property<int>("ExerciseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WorkoutId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Repetitions")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Weight")
+                        .HasColumnType("int");
+
+                    b.HasKey("ExerciseId", "WorkoutId");
+
+                    b.HasIndex("WorkoutId");
+
+                    b.ToTable("ExerciseRepetitions");
                 });
 
             modelBuilder.Entity("backend.Models.Workout", b =>
@@ -53,33 +79,26 @@ namespace backend.Migrations
                     b.Property<int>("Bodyweight")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("WorkoutDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("WorkoutName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("WorkoutId");
 
                     b.ToTable("Workouts");
                 });
 
-            modelBuilder.Entity("backend.Models.WorkoutExercise", b =>
+            modelBuilder.Entity("backend.Models.Exercise", b =>
                 {
-                    b.Property<int>("ExerciseId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WorkoutId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Repetitions")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("WorkoutDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("ExerciseId", "WorkoutId");
-
-                    b.HasIndex("WorkoutId");
-
-                    b.ToTable("WorkoutsExercises");
+                    b.HasOne("backend.Models.Workout", null)
+                        .WithMany("Exercise")
+                        .HasForeignKey("WorkoutId");
                 });
 
-            modelBuilder.Entity("backend.Models.WorkoutExercise", b =>
+            modelBuilder.Entity("backend.Models.ExerciseRepetitions", b =>
                 {
                     b.HasOne("backend.Models.Exercise", "Exercise")
                         .WithMany("WorkoutExercise")
@@ -105,6 +124,8 @@ namespace backend.Migrations
 
             modelBuilder.Entity("backend.Models.Workout", b =>
                 {
+                    b.Navigation("Exercise");
+
                     b.Navigation("WorkoutExercise");
                 });
 #pragma warning restore 612, 618

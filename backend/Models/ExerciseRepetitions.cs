@@ -2,7 +2,7 @@
 
 namespace backend.Models
 {
-    public class WorkoutExercise
+    public class ExerciseRepetitions
     {
         public int ExerciseId { get; set; }
         public Exercise Exercise { get; set; } = null!;
@@ -12,7 +12,6 @@ namespace backend.Models
 
         public int Repetitions { get; set; }
 
-        public DateTime WorkoutDate { get; set; }
-
+        public int Weight { get; set; }
     }
 }

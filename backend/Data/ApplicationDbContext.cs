@@ -7,7 +7,7 @@ namespace backend.Data
     {
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<Workout> Workouts { get; set; }
-        public DbSet<WorkoutExercise> WorkoutsExercises { get; set; }
+        public DbSet<ExerciseRepetitions> ExerciseRepetitions { get; set; }
 
         public ApplicationDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
         {
@@ -15,16 +15,16 @@ namespace backend.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<WorkoutExercise>().HasKey(e => new { e.ExerciseId, e.WorkoutId });
+            modelBuilder.Entity<ExerciseRepetitions>().HasKey(e => new { e.ExerciseId, e.WorkoutId });
 
-            modelBuilder.Entity<WorkoutExercise>()
+            modelBuilder.Entity<ExerciseRepetitions>()
                 .HasOne(we => we.Exercise)
-                .WithMany(w => w.WorkoutExercise)
+                .WithMany(w => w.ExerciseRepetitions)
                 .HasForeignKey(we => we.ExerciseId);
 
-            modelBuilder.Entity<WorkoutExercise>()
+            modelBuilder.Entity<ExerciseRepetitions>()
                 .HasOne(we => we.Workout)
-                .WithMany(w => w.WorkoutExercise)
+                .WithMany(w => w.ExerciseRepetitions)
                 .HasForeignKey(we => we.WorkoutId);
 
         }
