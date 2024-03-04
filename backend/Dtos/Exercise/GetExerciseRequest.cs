@@ -1,4 +1,6 @@
-﻿namespace backend.Dtos.Exercise
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace backend.Dtos.Exercise
 {
     public class GetExerciseRequest
     {

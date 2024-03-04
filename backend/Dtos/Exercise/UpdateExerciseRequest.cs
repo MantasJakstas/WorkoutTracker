@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace backend.Dtos.Exercise
 {
-    public class CreateExerciseRequest
+    public class UpdateExerciseRequest
     {
         [Required]
         public string Name { get; set; } = string.Empty;
