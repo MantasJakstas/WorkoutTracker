@@ -4,6 +4,5 @@
     {
         public int Repetitions { get; set; }
         public int Weight { get; set; }
-
     }
 }

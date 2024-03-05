@@ -3,6 +3,7 @@ using backend.Dtos.Exercise;
 using backend.Dtos.Workout;
 using backend.Interfaces;
 using backend.Mappers;
+using backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,9 +29,44 @@ namespace backend.Controllers
         [HttpPost]
         public IActionResult CreateWorkout([FromBody] CreateWorkoutRequest workout)
         {
+
             _context.Workouts.Add(workout.ToWorkoutCreateDto());
             _context.SaveChanges();
             return Ok(workout);
+        }
+
+        [Route("exercises")]
+        [HttpPost]
+        public IActionResult CreateWorkoutWithExercises([FromBody] CreateWorkoutWithExercisesRequest workoutWithExercises)
+        {
+            Workout workout = new Workout
+            {
+                WorkoutName = workoutWithExercises.WorkoutName,
+                WorkoutDate = workoutWithExercises.WorkoutDate,
+                Bodyweight = workoutWithExercises.BodyWeight,
+            };
+
+            _context.Workouts.Add(workout);
+            _context.SaveChanges();
+
+            foreach (var exercises in workoutWithExercises.Exercises)
+            {
+                var exercise = _context.Exercises.Find(exercises.ExerciseId);
+                if (exercise != null)
+                {
+                    ExerciseRepetitions exerciseRepetitions = new ExerciseRepetitions
+                    {
+                        ExerciseId = exercises.ExerciseId,
+                        WorkoutId = workout.WorkoutId,
+                        Repetitions = exercises.Repetitions,
+                        Weight = exercises.Weight,
+                    };
+                    _context.ExerciseRepetitions.Add(exerciseRepetitions);
+                }
+            }
+            _context.SaveChanges();
+
+            return Ok(workout.ToWorkoutGetDto());
         }
     }
 }

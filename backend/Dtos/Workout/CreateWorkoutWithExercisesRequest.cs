@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using backend.Dtos.Exercise;
 
 namespace backend.Dtos.Workout
 {
-    public class CreateWorkoutRequest
+    public class CreateWorkoutWithExercisesRequest
     {
         public string WorkoutName { get; set; } = string.Empty;
 
@@ -10,5 +10,6 @@ namespace backend.Dtos.Workout
 
         public DateTime WorkoutDate { get; set; } = DateTime.Now;
 
+        public List<CreateExerciseWithReps> Exercises { get; set; } = new List<CreateExerciseWithReps>();
     }
 }

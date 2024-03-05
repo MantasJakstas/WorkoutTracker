@@ -12,8 +12,9 @@ namespace backend.Mappers
         {
             return new Workout()
             {
+                WorkoutDate = createWorkoutRequest.WorkoutDate,
+                WorkoutName = createWorkoutRequest.WorkoutName,
                 Bodyweight = createWorkoutRequest.BodyWeight,
-
             };
         }
 
@@ -21,9 +22,10 @@ namespace backend.Mappers
         {
             return new GetWorkoutRequest()
             {
+                WorkoutName = getWorkoutRequest.WorkoutName,
                 Bodyweight = getWorkoutRequest.Bodyweight,
                 WorkoutId = getWorkoutRequest.WorkoutId,
-                WorkoutName = getWorkoutRequest.WorkoutName,
+                WorkoutDate = getWorkoutRequest.WorkoutDate,
                 ExerciseReps = getWorkoutRequest.ExerciseRepetitions.Select(e => new GetExerciseRepetionRequest()
                 {
                     Repetitions = e.Repetitions,

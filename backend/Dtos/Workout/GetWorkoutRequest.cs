@@ -7,10 +7,11 @@ namespace backend.Dtos.Workout
     {
         public int WorkoutId { get; set; }
         public string WorkoutName { get; set; } = string.Empty;
+        public DateTime WorkoutDate { get; set; } = DateTime.Now;
 
         public int Bodyweight { get; set; }
 
-        public List<GetExerciseRepetionRequest> ExerciseReps { get; set; }
+        public List<GetExerciseRepetionRequest> ExerciseReps { get; set; } = new List<GetExerciseRepetionRequest>();
 
     }
 }
