@@ -8,7 +8,7 @@ namespace backend.Mappers
 {
     public static class WorkoutMapper
     {
-        public static Workout ToWorkoutCreateDto(this CreateWorkoutRequest createWorkoutRequest)
+        public static Workout ToWorkoutCreateDto(this CreateWorkout createWorkoutRequest)
         {
             return new Workout()
             {
@@ -18,15 +18,15 @@ namespace backend.Mappers
             };
         }
 
-        public static GetWorkoutRequest ToWorkoutGetDto(this Workout getWorkoutRequest)
+        public static GetWorkout ToWorkoutGetDto(this Workout getWorkoutRequest)
         {
-            return new GetWorkoutRequest()
+            return new GetWorkout()
             {
                 WorkoutName = getWorkoutRequest.WorkoutName,
                 Bodyweight = getWorkoutRequest.Bodyweight,
                 WorkoutId = getWorkoutRequest.WorkoutId,
                 WorkoutDate = getWorkoutRequest.WorkoutDate,
-                ExerciseReps = getWorkoutRequest.ExerciseRepetitions.Select(e => new GetExerciseRepetionRequest()
+                ExerciseReps = getWorkoutRequest.ExerciseRepetitions.Select(e => new GetExerciseRepetion()
                 {
                     Repetitions = e.Repetitions,
                     Weight = e.Weight,

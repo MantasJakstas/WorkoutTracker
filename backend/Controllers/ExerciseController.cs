@@ -52,7 +52,7 @@ namespace backend.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateExercise([FromBody] CreateExerciseRequest exercise)
+        public IActionResult CreateExercise([FromBody] CreateExercise exercise)
         {
             if (!ModelState.IsValid)
             {
@@ -63,7 +63,7 @@ namespace backend.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public IActionResult UpdateExercise([FromRoute] int id, [FromBody] UpdateExerciseRequest exercise)
+        public IActionResult UpdateExercise([FromRoute] int id, [FromBody] UpdateExercise exercise)
         {
             if (!ModelState.IsValid)
             {

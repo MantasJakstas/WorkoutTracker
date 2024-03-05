@@ -1,6 +1,6 @@
 ﻿namespace backend.Dtos.Exercise
 {
-    public class CreateExerciseWithReps
+    public class AddExercisesWithReps
     {
         public int ExerciseId { get; set; }
         public int Repetitions { get; set; }

@@ -2,7 +2,7 @@
 
 namespace backend.Dtos.Exercise
 {
-    public class GetExerciseRequest
+    public class GetExercise
     {
         public string Name { get; set; } = string.Empty;
         public string MuscleGroup { get; set; } = string.Empty;

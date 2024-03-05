@@ -27,7 +27,7 @@ namespace backend.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateWorkout([FromBody] CreateWorkoutRequest workout)
+        public IActionResult CreateWorkout([FromBody] CreateWorkout workout)
         {
 
             _context.Workouts.Add(workout.ToWorkoutCreateDto());
@@ -37,7 +37,7 @@ namespace backend.Controllers
 
         [Route("exercises")]
         [HttpPost]
-        public IActionResult CreateWorkoutWithExercises([FromBody] CreateWorkoutWithExercisesRequest workoutWithExercises)
+        public IActionResult CreateWorkoutWithExercises([FromBody] CreateWorkoutWithExercises workoutWithExercises)
         {
             Workout workout = new Workout
             {

@@ -26,7 +26,7 @@ namespace backend.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateWorkoutExercise(int workoutId, int exerciseId, [FromBody] CreateWorkoutExerciseRequest workoutExerciseRequest)
+        public IActionResult CreateWorkoutExercise(int workoutId, int exerciseId, [FromBody] CreateWorkoutExercise workoutExerciseRequest)
         {
             var workout = _context.Workouts.Find(workoutId);
             var exercise = _context.Exercises.Find(exerciseId);

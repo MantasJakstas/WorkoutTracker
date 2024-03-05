@@ -3,7 +3,7 @@ using backend.Models;
 
 namespace backend.Dtos.Workout
 {
-    public class GetWorkoutRequest
+    public class GetWorkout
     {
         public int WorkoutId { get; set; }
         public string WorkoutName { get; set; } = string.Empty;
@@ -11,7 +11,7 @@ namespace backend.Dtos.Workout
 
         public int Bodyweight { get; set; }
 
-        public List<GetExerciseRepetionRequest> ExerciseReps { get; set; } = new List<GetExerciseRepetionRequest>();
+        public List<GetExerciseRepetion> ExerciseReps { get; set; } = new List<GetExerciseRepetion>();
 
     }
 }

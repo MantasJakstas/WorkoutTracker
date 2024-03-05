@@ -2,9 +2,9 @@
 
 namespace backend.Dtos.WorktoutExecrise
 {
-    public class GetExerciseRepetionRequest
+    public class GetExerciseRepetion
     {
-        public GetExerciseRequest Exercise { get; set; } = new GetExerciseRequest();
+        public GetExercise Exercise { get; set; } = new GetExercise();
         public int Repetitions { get; set; }
         public int Weight { get; set; }
     }

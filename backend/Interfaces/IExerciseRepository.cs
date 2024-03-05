@@ -6,14 +6,14 @@ namespace backend.Interfaces
 {
     public interface IExerciseRepository
     {
-        List<GetExerciseRequest> GetAllExercises();
+        List<GetExercise> GetAllExercises();
 
-        GetExerciseRequest? GetExercise(int id);
+        GetExercise? GetExercise(int id);
 
-        GetExerciseRequest? DeleteExercise(int id);
+        GetExercise? DeleteExercise(int id);
 
-        CreateExerciseRequest CreateExercise(CreateExerciseRequest exerciseRequest);
+        CreateExercise CreateExercise(CreateExercise exerciseRequest);
 
-        GetExerciseRequest? UpdateExercise(int id, UpdateExerciseRequest exercise);
+        GetExercise? UpdateExercise(int id, UpdateExercise exercise);
     }
 }

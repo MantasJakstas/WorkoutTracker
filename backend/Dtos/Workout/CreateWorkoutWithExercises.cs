@@ -2,7 +2,7 @@
 
 namespace backend.Dtos.Workout
 {
-    public class CreateWorkoutWithExercisesRequest
+    public class CreateWorkoutWithExercises
     {
         public string WorkoutName { get; set; } = string.Empty;
 
@@ -10,6 +10,6 @@ namespace backend.Dtos.Workout
 
         public DateTime WorkoutDate { get; set; } = DateTime.Now;
 
-        public List<CreateExerciseWithReps> Exercises { get; set; } = new List<CreateExerciseWithReps>();
+        public List<AddExercisesWithReps> Exercises { get; set; } = new List<AddExercisesWithReps>();
     }
 }

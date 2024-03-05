@@ -2,7 +2,7 @@
 
 namespace backend.Dtos.Workout
 {
-    public class CreateWorkoutRequest
+    public class CreateWorkout
     {
         public string WorkoutName { get; set; } = string.Empty;
 

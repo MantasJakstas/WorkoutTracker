@@ -16,14 +16,14 @@ namespace backend.Repository
             _context = context;
         }
 
-        public CreateExerciseRequest CreateExercise(CreateExerciseRequest exerciseRequest)
+        public CreateExercise CreateExercise(CreateExercise exerciseRequest)
         {
             _context.Exercises.Add(exerciseRequest.ToExerciseCreateDto());
             _context.SaveChanges();
             return exerciseRequest;
         }
 
-        public GetExerciseRequest? DeleteExercise(int id)
+        public GetExercise? DeleteExercise(int id)
         {
             var exercise = _context.Exercises.FirstOrDefault(e => e.ExerciseId == id);
             if (exercise == null)
@@ -35,13 +35,13 @@ namespace backend.Repository
             return exercise.ToExerciseDto();
         }
 
-        public List<GetExerciseRequest> GetAllExercises()
+        public List<GetExercise> GetAllExercises()
         {
             var exercises = _context.Exercises.Select(e => e.ToExerciseDto()).ToList();
             return exercises;
         }
 
-        public GetExerciseRequest? GetExercise(int id)
+        public GetExercise? GetExercise(int id)
         {
             var exercise = _context.Exercises.FirstOrDefault(e => e.ExerciseId == id);
             if (exercise == null)
@@ -51,7 +51,7 @@ namespace backend.Repository
             return exercise.ToExerciseDto();
         }
 
-        public GetExerciseRequest? UpdateExercise(int id, UpdateExerciseRequest exercise)
+        public GetExercise? UpdateExercise(int id, UpdateExercise exercise)
         {
             var exerciseToUpdate = _context.Exercises.FirstOrDefault(e => e.ExerciseId == id);
             if (exerciseToUpdate == null)

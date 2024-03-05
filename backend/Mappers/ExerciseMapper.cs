@@ -6,7 +6,7 @@ namespace backend.Mappers
 {
     public static class ExerciseMapper
     {
-        public static Exercise ToExerciseCreateDto(this CreateExerciseRequest createExerciseRequest)
+        public static Exercise ToExerciseCreateDto(this CreateExercise createExerciseRequest)
         {
             return new Exercise()
             {
@@ -15,9 +15,9 @@ namespace backend.Mappers
             };
         }
 
-        public static GetExerciseRequest ToExerciseDto(this Exercise exercise)
+        public static GetExercise ToExerciseDto(this Exercise exercise)
         {
-            return new GetExerciseRequest()
+            return new GetExercise()
             {
                 Name = exercise.Name,
                 MuscleGroup = exercise.MuscleGroup.ToString(),
