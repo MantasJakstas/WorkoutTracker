@@ -35,7 +35,7 @@ namespace backend.Controllers
             return Ok(workout);
         }
 
-        [Route("exercises")]
+        [Route("createWithExercises")]
         [HttpPost]
         public IActionResult CreateWorkoutWithExercises([FromBody] CreateWorkoutWithExercises workoutWithExercises)
         {
@@ -49,10 +49,45 @@ namespace backend.Controllers
             _context.Workouts.Add(workout);
             _context.SaveChanges();
 
-            foreach (var exercises in workoutWithExercises.Exercises)
+            foreach (var exercises in workoutWithExercises.ExercisesWithReps)
             {
                 var exercise = _context.Exercises.Find(exercises.ExerciseId);
                 if (exercise != null)
+                {
+                    ExerciseRepetitions exerciseRepetitions = new ExerciseRepetitions
+                    {
+                        ExerciseId = exercises.ExerciseId,
+                        WorkoutId = workout.WorkoutId,
+                        Repetitions = exercises.Repetitions,
+                        Weight = exercises.Weight,
+                    };
+                    _context.ExerciseRepetitions.Add(exerciseRepetitions);
+                }
+            }
+            _context.SaveChanges();
+
+            return Ok(workout.ToWorkoutGetDto());
+        }
+
+        [Route("addExercises")]
+        [HttpPost]
+        public IActionResult AddExercisesToWorkout([FromBody] AddExercisesToWorkout exercisesWithWorkout)
+        {
+            var workout = _context.Workouts.Find(exercisesWithWorkout.WorkoutId);
+
+            if (workout == null)
+            {
+                return BadRequest("No such workout exists");
+            }
+
+            foreach (var exercises in exercisesWithWorkout.ExercisesWithReps)
+            {
+                var exercise = _context.Exercises.Find(exercises.ExerciseId);
+                if (exercise == null)
+                {
+                    return BadRequest("No such exercise exists");
+                }
+                else
                 {
                     ExerciseRepetitions exerciseRepetitions = new ExerciseRepetitions
                     {

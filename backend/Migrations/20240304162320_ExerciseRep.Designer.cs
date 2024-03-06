@@ -47,7 +47,7 @@ namespace backend.Migrations
 
                     b.HasIndex("WorkoutId");
 
-                    b.ToTable("Exercises");
+                    b.ToTable("ExercisesWithReps");
                 });
 
             modelBuilder.Entity("backend.Models.ExerciseRepetitions", b =>

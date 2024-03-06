@@ -10,6 +10,6 @@ namespace backend.Dtos.Workout
 
         public DateTime WorkoutDate { get; set; } = DateTime.Now;
 
-        public List<AddExercisesWithReps> Exercises { get; set; } = new List<AddExercisesWithReps>();
+        public List<AddExercisesWithReps> ExercisesWithReps { get; set; } = new List<AddExercisesWithReps>();
     }
 }

@@ -13,6 +13,8 @@ import {
   TextField,
 } from "@mui/material";
 
+import axios, { isCancel, AxiosError } from "axios";
+
 export default function CreateExercise() {
   const [open, setOpen] = React.useState(false);
   const [group, setGroup] = React.useState("");
@@ -35,12 +37,22 @@ export default function CreateExercise() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+
     const name = data.get("name");
     const group = data.get("group");
-    console.log({
-      name: name,
-      group: group,
-    });
+
+    axios
+      .post("https://localhost:7020/api/Exercise", {
+        name: name,
+        muscleGroup: group,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
     handleClose();
   };
 

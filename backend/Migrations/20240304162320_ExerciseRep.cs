@@ -27,7 +27,7 @@ namespace backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Exercises",
+                name: "ExercisesWithReps",
                 columns: table => new
                 {
                     ExerciseId = table.Column<int>(type: "int", nullable: false)
@@ -61,7 +61,7 @@ namespace backend.Migrations
                     table.ForeignKey(
                         name: "FK_ExerciseRepetitions_Exercises_ExerciseId",
                         column: x => x.ExerciseId,
-                        principalTable: "Exercises",
+                        principalTable: "ExercisesWithReps",
                         principalColumn: "ExerciseId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -79,7 +79,7 @@ namespace backend.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Exercises_WorkoutId",
-                table: "Exercises",
+                table: "ExercisesWithReps",
                 column: "WorkoutId");
         }
 
@@ -90,7 +90,7 @@ namespace backend.Migrations
                 name: "ExerciseRepetitions");
 
             migrationBuilder.DropTable(
-                name: "Exercises");
+                name: "ExercisesWithReps");
 
             migrationBuilder.DropTable(
                 name: "Workouts");

@@ -1,5 +1,5 @@
 import React from "react";
-import Heading from "./../components/Heading";
+import Heading from "../components/Heading";
 import { Box, Button, Container, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import CreateExercise from "./CreateExercise";
