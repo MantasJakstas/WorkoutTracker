@@ -15,7 +15,7 @@ import {
 
 import axios, { isCancel, AxiosError } from "axios";
 
-export default function CreateExercise() {
+export default function CreateExercise({ shouldRefetch }) {
   const [open, setOpen] = React.useState(false);
   const [group, setGroup] = React.useState("");
 
@@ -35,7 +35,6 @@ export default function CreateExercise() {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();
     const data = new FormData(event.currentTarget);
 
     const name = data.get("name");
@@ -48,11 +47,11 @@ export default function CreateExercise() {
       })
       .then((response) => {
         console.log(response);
+        shouldRefetch();
       })
       .catch((error) => {
         console.log(error);
       });
-
     handleClose();
   };
 

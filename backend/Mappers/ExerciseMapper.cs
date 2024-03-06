@@ -19,6 +19,7 @@ namespace backend.Mappers
         {
             return new GetExercise()
             {
+                Id = exercise.ExerciseId,
                 Name = exercise.Name,
                 MuscleGroup = exercise.MuscleGroup.ToString(),
             };
