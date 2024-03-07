@@ -17,7 +17,6 @@ const getExercises = async () => {
 
 export default function WorkoutPage() {
   const [exercises, setData] = React.useState([]);
-
   const [shouldRefetch, setShouldRefetch] = React.useState(false);
 
   useEffect(() => {
@@ -57,7 +56,10 @@ export default function WorkoutPage() {
           <Box>
             <Typography>Dont Have an exercise?</Typography>
             <CreateExercise shouldRefetch={handleRefresh} />
-            <ExercisesTable exercises={exercises} />
+            <ExercisesTable
+              exercises={exercises}
+              shouldRefetch={handleRefresh}
+            />
           </Box>
         </Box>
       </Container>
