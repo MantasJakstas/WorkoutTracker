@@ -42,24 +42,28 @@ export default function ExercisesTable({ exercises, shouldRefetch }) {
               </TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
-            {exercises.map((data) => (
-              <TableRow key={data.id}>
-                <TableCell>{data.name}</TableCell>
-                <TableCell align="center">{data.muscleGroup}</TableCell>
-                <TableCell>
-                  <Button
-                    sx={{ maxWidth: 5 }}
-                    color="error"
-                    variant="contained"
-                    onClick={() => onDelete(data.id)}
-                  >
-                    <DeleteIcon />
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
+          {exercises ? (
+            <TableBody>
+              {exercises.map((data) => (
+                <TableRow key={data.id}>
+                  <TableCell>{data.name}</TableCell>
+                  <TableCell align="center">{data.muscleGroup}</TableCell>
+                  <TableCell>
+                    <Button
+                      sx={{ maxWidth: 5 }}
+                      color="error"
+                      variant="contained"
+                      onClick={() => onDelete(data.id)}
+                    >
+                      <DeleteIcon />
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          ) : (
+            <Typography>Unable to get exercises</Typography>
+          )}
         </Table>
       </TableContainer>
     </div>

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import CreateExercise from "../components/CreateExercise";
 import ExercisesTable from "../components/ExercisesTable";
 import axios, { isCancel, AxiosError } from "axios";
+import CreateWorkout from "../components/CreateWorkout";
 
 const getExercises = async () => {
   try {
@@ -43,15 +44,7 @@ export default function WorkoutPage() {
         >
           <Box>
             <Typography>Create Your Workout:</Typography>
-            <Link to="/">
-              <Button
-                sx={{ height: 50, borderRadius: 3, mt: 2, width: 350 }}
-                variant="contained"
-                color="success"
-              >
-                Create Workout
-              </Button>
-            </Link>
+            <CreateWorkout />
           </Box>
           <Box>
             <Typography>Dont Have an exercise?</Typography>
