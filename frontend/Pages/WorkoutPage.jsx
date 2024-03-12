@@ -44,7 +44,7 @@ export default function WorkoutPage() {
         >
           <Box>
             <Typography>Create Your Workout:</Typography>
-            <CreateWorkout />
+            <CreateWorkout exercises={exercises} />
           </Box>
           <Box>
             <Typography>Dont Have an exercise?</Typography>

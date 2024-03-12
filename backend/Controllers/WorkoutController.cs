@@ -29,7 +29,10 @@ namespace backend.Controllers
         [HttpPost]
         public IActionResult CreateWorkout([FromBody] CreateWorkout workout)
         {
-
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             _context.Workouts.Add(workout.ToWorkoutCreateDto());
             _context.SaveChanges();
             return Ok(workout);
@@ -39,6 +42,11 @@ namespace backend.Controllers
         [HttpPost]
         public IActionResult CreateWorkoutWithExercises([FromBody] CreateWorkoutWithExercises workoutWithExercises)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             Workout workout = new Workout
             {
                 WorkoutName = workoutWithExercises.WorkoutName,
@@ -51,18 +59,19 @@ namespace backend.Controllers
 
             foreach (var exercises in workoutWithExercises.ExercisesWithReps)
             {
-                var exercise = _context.Exercises.Find(exercises.ExerciseId);
-                if (exercise != null)
+                var exercise = _context.Exercises.FirstOrDefault(s => s.Name == exercises.ExerciseName);
+                if (exercise == null)
                 {
-                    ExerciseRepetitions exerciseRepetitions = new ExerciseRepetitions
-                    {
-                        ExerciseId = exercises.ExerciseId,
-                        WorkoutId = workout.WorkoutId,
-                        Repetitions = exercises.Repetitions,
-                        Weight = exercises.Weight,
-                    };
-                    _context.ExerciseRepetitions.Add(exerciseRepetitions);
+                    return BadRequest($"{exercises.ExerciseName}: Exercise not found");
                 }
+                ExerciseRepetitions exerciseRepetitions = new ExerciseRepetitions
+                {
+                    ExerciseId = exercise.ExerciseId,
+                    WorkoutId = workout.WorkoutId,
+                    Repetitions = exercises.Repetitions,
+                    Weight = exercises.Weight,
+                };
+                _context.ExerciseRepetitions.Add(exerciseRepetitions);
             }
             _context.SaveChanges();
 
@@ -73,6 +82,10 @@ namespace backend.Controllers
         [HttpPost]
         public IActionResult AddExercisesToWorkout([FromBody] AddExercisesToWorkout exercisesWithWorkout)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var workout = _context.Workouts.Find(exercisesWithWorkout.WorkoutId);
 
             if (workout == null)
@@ -82,7 +95,7 @@ namespace backend.Controllers
 
             foreach (var exercises in exercisesWithWorkout.ExercisesWithReps)
             {
-                var exercise = _context.Exercises.Find(exercises.ExerciseId);
+                var exercise = _context.Exercises.Find(exercises.ExerciseName);
                 if (exercise == null)
                 {
                     return BadRequest("No such exercise exists");
@@ -91,7 +104,7 @@ namespace backend.Controllers
                 {
                     ExerciseRepetitions exerciseRepetitions = new ExerciseRepetitions
                     {
-                        ExerciseId = exercises.ExerciseId,
+                        ExerciseId = exercise.ExerciseId,
                         WorkoutId = workout.WorkoutId,
                         Repetitions = exercises.Repetitions,
                         Weight = exercises.Weight,

@@ -15,8 +15,13 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import AddExerciseFormInput from "./AddExerciseFormInput";
+import axios from "axios";
+export default function CreateWorkout({ exercises }) {
+  const exerciseName = [];
+  exercises.map((exercise) => {
+    exerciseName.push(exercise.name);
+  });
 
-export default function CreateWorkout() {
   const [open, setOpen] = React.useState(false);
   const [render, setRender] = React.useState(["Sample"]);
   const handleClose = () => {
@@ -24,7 +29,6 @@ export default function CreateWorkout() {
     setRender(["Sample"]);
   };
   const handleOpen = () => setOpen(true);
-  const exercises = ["Jumping jacks", "Pull ups"];
 
   const AddComponent = () => {
     setRender([...render, "Sample"]);
@@ -41,21 +45,37 @@ export default function CreateWorkout() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const exercsises = [];
+    const exercsisesArray = [];
 
+    const workouteName = data.get("workoutName");
     const exercisesName = data.getAll("exercise");
     const repetitions = data.getAll("repetitions");
     const weight = data.getAll("repetitions");
-
+    const bodyWeight = data.get("bodyWeight");
+    const workoutDate = data.get("date");
     for (let i = 0; i < exercisesName.length; i++) {
-      exercsises.push({
-        exercise: exercisesName[i],
+      exercsisesArray.push({
+        exerciseName: exercisesName[i],
         repetition: repetitions[i],
         weight: weight[i],
       });
     }
 
-    console.log(exercsises);
+    axios
+      .post("https://localhost:7020/api/Workout/createWithExercises", {
+        workoutName: workouteName,
+        bodyWeight: bodyWeight,
+        workoutDate: workoutDate,
+        exercisesWithReps: exercsisesArray,
+      })
+      .then((response) => {
+        console.log(response);
+        //shouldRefetch();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    handleClose();
   };
 
   return (
@@ -90,8 +110,8 @@ export default function CreateWorkout() {
                 </Grid>
 
                 <Grid item xs={10} sm={8}>
-                  {render.map((item, i) => (
-                    <AddExerciseFormInput key={i} exercises={exercises} />
+                  {render.map((exercsises, i) => (
+                    <AddExerciseFormInput key={i} exerciseName={exerciseName} />
                   ))}
                 </Grid>
 
@@ -111,6 +131,9 @@ export default function CreateWorkout() {
                 <Grid item xs={12}>
                   <TextField
                     required
+                    inputProps={{
+                      pattern: "[0-9]+",
+                    }}
                     name="bodyWeight"
                     label="BodyWeight"
                     fullWidth
