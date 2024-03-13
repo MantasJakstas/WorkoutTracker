@@ -18,9 +18,12 @@ import AddExerciseFormInput from "./AddExerciseFormInput";
 import axios from "axios";
 export default function CreateWorkout({ exercises }) {
   const exerciseName = [];
-  exercises.map((exercise) => {
-    exerciseName.push(exercise.name);
-  });
+
+  if (exercises != null) {
+    exercises.map((exercise) => {
+      exerciseName.push(exercise.name);
+    });
+  }
 
   const [open, setOpen] = React.useState(false);
   const [render, setRender] = React.useState(["Sample"]);

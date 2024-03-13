@@ -6,8 +6,18 @@ import CreateExercise from "../components/CreateExercise";
 import ExercisesTable from "../components/ExercisesTable";
 import axios, { isCancel, AxiosError } from "axios";
 import CreateWorkout from "../components/CreateWorkout";
+import WorkoutTable from "../components/WorkoutTable";
 
 const getExercises = async () => {
+  try {
+    const response = await axios.get("https://localhost:7020/api/Exercise");
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getWorkouts = async () => {
   try {
     const response = await axios.get("https://localhost:7020/api/Exercise");
     return response.data;
@@ -45,6 +55,7 @@ export default function WorkoutPage() {
           <Box>
             <Typography>Create Your Workout:</Typography>
             <CreateWorkout exercises={exercises} />
+            <WorkoutTable />
           </Box>
           <Box>
             <Typography>Dont Have an exercise?</Typography>

@@ -2,7 +2,6 @@ import React from "react";
 import { Grid, TextField, Autocomplete, Button } from "@mui/material";
 
 function AddExerciseFormInput({ exerciseName }) {
-  console.log(exerciseName);
   return (
     <Grid container spacing={3} mb={1}>
       <Grid item xs={4} sm={4}>
